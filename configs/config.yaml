@@ -1,0 +1,161 @@
+# Flight Operations Optimiser Configuration
+# This file contains all configuration settings for the flight operations optimisation project
+
+database:
+  connection_string: "sqlite:///flight_data.db"
+  host: "localhost"
+  port: 5432
+  name: "flight_ops"
+  username: "flight_user"
+  password: ""
+  pool_size: 10
+  max_overflow: 20
+
+mlflow:
+  tracking_uri: "sqlite:///mlflow.db"
+  experiment_name: "flight_delay_prediction"
+  artifact_location: "./mlruns"
+  registry_uri: null
+
+optimisation:
+  gurobi_license: ""
+  time_limit: 300
+  mip_gap: 0.01
+  max_crew_duty_hours: 12
+  min_crew_rest_hours: 10
+  max_aircraft_utilization: 0.85
+  delay_penalty: 1000
+  crew_cost_per_hour: 50
+  aircraft_cost_per_hour: 200
+
+model:
+  test_size: 0.2
+  random_state: 42
+  cv_folds: 5
+  feature_selection: true
+  hyperparameter_tuning: true
+  types:
+    - "random_forest"
+    - "gradient_boosting"
+    - "linear_regression"
+
+paths:
+  data_directory: "./data"
+  output_directory: "./output"
+  model_directory: "./models"
+  reports_directory: "./reports"
+  cache_directory: "./cache"
+
+logging:
+  level: "INFO"
+  format: "%(asctime)s - %(name)s - %(levelname)s - %(message)s"
+  file: "./logs/flight_ops.log"
+  max_size: 10485760  # 10MB
+  backup_count: 5
+  console_output: true
+
+dagster:
+  workspace_file: "workspace.yaml"
+  module_name: "src.dagster_pipeline"
+  pipeline_name: "flight_ops_pipeline"
+  schedule_interval: "0 6 * * *"  # Daily at 6 AM
+  retry_policy:
+    max_retries: 3
+    delay: 60
+
+data:
+  file_formats:
+    - "csv"
+    - "parquet"
+    - "json"
+  encoding: "utf-8"
+  chunk_size: 10000
+
+# Data source configurations
+data_sources:
+  flight_schedule:
+    type: "database"
+    table: "flight_schedule"
+    update_frequency: "hourly"
+  
+  weather_data:
+    type: "api"
+    endpoint: "https://api.weatherapi.com/v1"
+    update_frequency: "15min"
+  
+  delay_data:
+    type: "database"
+    table: "flight_delays"
+    update_frequency: "hourly"
+
+# Model training configurations
+training:
+  batch_size: 1000
+  epochs: 100
+  early_stopping_patience: 10
+  validation_split: 0.2
+  
+# Feature engineering configurations
+features:
+  time_features:
+    - "hour"
+    - "day_of_week"
+    - "month"
+    - "season"
+  
+  weather_features:
+    - "temperature"
+    - "humidity"
+    - "wind_speed"
+    - "visibility"
+    - "precipitation"
+  
+  historical_features:
+    - "avg_delay_7d"
+    - "avg_delay_30d"
+    - "delay_std_7d"
+  
+  route_features:
+    - "route_avg_delay"
+    - "aircraft_avg_delay"
+
+# Optimisation constraints
+constraints:
+  crew:
+    max_duty_hours: 12
+    min_rest_hours: 10
+    max_consecutive_flights: 4
+  
+  aircraft:
+    max_utilization: 0.85
+    min_maintenance_hours: 2
+    max_flight_hours: 16
+  
+  operational:
+    max_delay_penalty: 1000
+    min_turnaround_time: 30
+    max_connection_time: 120
+
+# Visualisation settings
+visualisation:
+  style: "seaborn-v0_8"
+  figure_size: [12, 8]
+  dpi: 300
+  save_format: "png"
+  colour_palette: "husl"
+  
+# Testing configurations
+testing:
+  test_data_size: 1000
+  random_seed: 42
+  coverage_threshold: 80
+  performance_threshold: 0.8
+
+# Deployment configurations
+deployment:
+  environment: "development"
+  docker_image: "flight-ops-optimiser:latest"
+  port: 8000
+  workers: 4
+  memory_limit: "4G"
+  cpu_limit: "2" 
