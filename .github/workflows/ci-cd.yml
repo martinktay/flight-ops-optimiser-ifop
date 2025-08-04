@@ -277,18 +277,29 @@ jobs:
     - name: Checkout code
       uses: actions/checkout@v4
     
+    - name: Build Docker image for production
+      run: |
+        docker build -t ${{ env.DOCKER_IMAGE }}:latest .
+        docker build -t ${{ env.DOCKER_IMAGE }}:${{ github.sha }} .
+    
     - name: Login to Docker Hub
       uses: docker/login-action@v2
       with:
         username: ${{ secrets.DOCKER_USERNAME }}
         password: ${{ secrets.DOCKER_PASSWORD }}
+      continue-on-error: true
     
-    - name: Build and push Docker image
+    - name: Push Docker image to registry
       run: |
-        docker build -t ${{ secrets.DOCKER_USERNAME }}/${{ env.DOCKER_IMAGE }}:latest .
-        docker build -t ${{ secrets.DOCKER_USERNAME }}/${{ env.DOCKER_IMAGE }}:${{ github.sha }} .
-        docker push ${{ secrets.DOCKER_USERNAME }}/${{ env.DOCKER_IMAGE }}:latest
-        docker push ${{ secrets.DOCKER_USERNAME }}/${{ env.DOCKER_IMAGE }}:${{ github.sha }}
+        if [ -n "${{ secrets.DOCKER_USERNAME }}" ]; then
+          docker tag ${{ env.DOCKER_IMAGE }}:latest ${{ secrets.DOCKER_USERNAME }}/${{ env.DOCKER_IMAGE }}:latest
+          docker tag ${{ env.DOCKER_IMAGE }}:${{ github.sha }} ${{ secrets.DOCKER_USERNAME }}/${{ env.DOCKER_IMAGE }}:${{ github.sha }}
+          docker push ${{ secrets.DOCKER_USERNAME }}/${{ env.DOCKER_IMAGE }}:latest
+          docker push ${{ secrets.DOCKER_USERNAME }}/${{ env.DOCKER_IMAGE }}:${{ github.sha }}
+        else
+          echo "Docker credentials not configured. Skipping image push."
+          echo "To enable Docker Hub pushes, add DOCKER_USERNAME and DOCKER_PASSWORD secrets to this repository."
+        fi
     
     - name: Deploy to production
       run: |
