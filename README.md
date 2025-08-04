@@ -1,6 +1,6 @@
-# Flight Operations Optimiser (IFOP)
+# Flight Operations Optimiser (iFOP)
 
-A modular Python project that predicts flight delays and optimises crew/aircraft scheduling using machine learning and linear programming.
+A comprehensive, production-ready Python project that predicts flight delays and optimises crew/aircraft scheduling using machine learning and linear programming. This project has been fully integrated with CI/CD pipelines, comprehensive testing, and a robust dataset management system.
 
 ## Features
 
@@ -12,6 +12,10 @@ A modular Python project that predicts flight delays and optimises crew/aircraft
 - **Testing**: Comprehensive unit tests with pytest
 - **CI/CD**: Automated testing and deployment with GitHub Actions
 - **Containerisation**: Docker support for easy deployment
+- **Dataset Management**: Intelligent filtering and sampling system for large datasets
+- **Security**: Automated security scanning with Bandit
+- **Performance**: Performance testing and benchmarking
+- **Documentation**: Automated documentation generation
 
 ## Project Structure
 
@@ -19,36 +23,37 @@ A modular Python project that predicts flight delays and optimises crew/aircraft
 flight-ops-optimiser-ifop/
 ├── src/
 │   ├── data/
-│   │   ├── ingestion/
-│   │   ├── cleaning/
-│   │   └── validation/
+│   │   ├── ingestion/          # Data ingestion modules
+│   │   ├── cleaning/           # Data cleaning and validation
+│   │   └── preprocessing/      # Dataset filtering and sampling
 │   ├── models/
-│   │   ├── delay_prediction/
-│   │   └── optimisation/
-│   ├── visualisation/
-│   └── utils/
-├── tests/
-├── configs/
-├── data/
-├── notebooks/
-├── docker/
-└── .github/
+│   │   ├── delay_prediction/   # ML models for delay prediction
+│   │   └── optimisation/       # Linear programming optimisation
+│   ├── visualisation/          # Charts and dashboards
+│   └── utils/                  # Configuration and logging
+├── tests/                      # Unit and integration tests
+├── configs/                    # Configuration files
+├── data/                       # Generated dataset samples
+├── scripts/                    # Utility scripts
+├── .github/workflows/          # CI/CD pipelines
+└── docs/                       # Documentation (auto-generated)
 ```
 
 ## Installation
 
 ### Prerequisites
 
-- Python 3.9+
+- Python 3.11+ (recommended)
 - Gurobi Optimiser (requires licence)
-- Docker (optional)
+- Docker (optional, for containerization)
+- Git (for version control)
 
 ### Setup
 
 1. Clone the repository:
 
 ```bash
-git clone <repository-url>
+git clone https://github.com/martinktay/flight-ops-optimiser-ifop.git
 cd flight-ops-optimiser-ifop
 ```
 
@@ -70,6 +75,72 @@ pip install -r requirements.txt
 ```bash
 cp .env.example .env
 # Edit .env with your configuration
+```
+
+5. Generate dataset samples (optional):
+
+```bash
+make filter-dataset
+```
+
+## CI/CD Pipeline
+
+The project includes a comprehensive CI/CD pipeline that automatically runs on every push and pull request. The pipeline ensures code quality, security, and reliability.
+
+### Pipeline Stages
+
+1. **Code Quality & Testing**
+   - Code formatting with Black
+   - Linting with Flake8
+   - Type checking with MyPy
+   - Unit tests with pytest and coverage reporting
+   - Integration tests
+
+2. **Security Scanning**
+   - Automated security scanning with Bandit
+   - Vulnerability detection and reporting
+
+3. **Docker Build & Test**
+   - Multi-stage Docker image building
+   - Container testing and validation
+   - Image optimization
+
+4. **MLflow Integration Testing**
+   - Model tracking system validation
+   - ML pipeline testing
+
+5. **Performance Testing**
+   - Benchmark testing
+   - Performance regression detection
+
+6. **Deployment**
+   - Staging deployment (develop branch)
+   - Production deployment (main branch)
+   - Health checks and monitoring
+
+### Pipeline Features
+
+- **Graceful Docker Handling**: Works with or without Docker Hub credentials
+- **Comprehensive Testing**: Unit, integration, and performance tests
+- **Security First**: Automated security scanning
+- **Documentation**: Auto-generated documentation
+- **Notifications**: Team notifications on success/failure
+
+### Local Development
+
+The pipeline is designed to work seamlessly with local development:
+
+```bash
+# Run tests locally
+pytest tests/ -v
+
+# Run code quality checks
+black --check src/ tests/
+flake8 src/ tests/
+mypy src/
+
+# Run security scan
+bandit -r src/
 ```
 
 ## Dataset Integration
@@ -304,30 +375,138 @@ flight-ops-optimiser-ifop/
 
 The dataset integration provides a solid foundation for all flight operations analysis and optimisation tasks in the iFOP project. The removal of the large original file makes the repository more manageable while maintaining all functionality through the pre-generated samples.
 
+## Recent Updates
+
+### Latest Improvements (August 2024)
+
+1. **Dataset Management Enhancement**
+   - Removed large 586MB dataset file for better repository management
+   - Implemented intelligent dataset filtering system
+   - Added pre-generated sample files for different use cases
+   - Updated all code references to use sample files
+
+2. **CI/CD Pipeline Optimization**
+   - Fixed Docker credential handling to work without secrets
+   - Added graceful error handling for missing credentials
+   - Enhanced security scanning and performance testing
+   - Improved pipeline reliability and feedback
+
+3. **Code Quality Improvements**
+   - Updated Python version requirement to 3.11+
+   - Enhanced error handling and logging
+   - Improved documentation and examples
+   - Added comprehensive testing coverage
+
+4. **Repository Structure**
+   - Cleaned up project structure
+   - Added proper .gitignore rules
+   - Included all necessary configuration files
+   - Optimized for team collaboration
+
+### Repository Status
+
+- ✅ **Fully Functional**: All core features implemented and tested
+- ✅ **CI/CD Ready**: Automated pipeline with comprehensive testing
+- ✅ **Production Ready**: Docker support and deployment automation
+- ✅ **Team Ready**: Clear documentation and contribution guidelines
+- ✅ **Scalable**: Modular architecture for easy extension
+
 ## Usage
 
-### Running the Data Pipeline
+### Quick Start
 
 ```bash
+# Generate dataset samples
+make filter-dataset
+
+# Run the data pipeline
 dagster dev
+
+# Run tests
+pytest tests/ -v
 ```
 
-### Training Models
+### Data Pipeline
 
 ```bash
+# Start Dagster development server
+dagster dev
+
+# Run specific pipeline assets
+dagster asset materialize raw_delay_data
+```
+
+### Model Training
+
+```bash
+# Train delay prediction models
 python -m src.models.delay_prediction.train
-```
 
-### Running Optimisation
-
-```bash
+# Run optimisation
 python -m src.models.optimisation.scheduler
 ```
 
-### Running Tests
+### Testing
 
 ```bash
-pytest tests/
+# Run all tests
+pytest tests/ -v
+
+# Run with coverage
+pytest tests/ --cov=src --cov-report=html
+
+# Run specific test categories
+pytest tests/ -m unit
+pytest tests/ -m integration
+pytest tests/ -m performance
+```
+
+### Code Quality
+
+```bash
+# Format code
+black src/ tests/
+
+# Lint code
+flake8 src/ tests/
+
+# Type checking
+mypy src/
+
+# Security scan
+bandit -r src/
+```
+
+### Docker Operations
+
+```bash
+# Build Docker image
+docker build -t flight-ops-optimiser .
+
+# Run container
+docker run -p 3000:3000 flight-ops-optimiser
+
+# Run tests in container
+docker run flight-ops-optimiser pytest tests/ -v
+```
+
+### Makefile Commands
+
+The project includes a comprehensive Makefile for common operations:
+
+```bash
+# Dataset operations
+make filter-dataset          # Generate all dataset samples
+make create-dev-sample       # Create development sample (50K rows)
+make create-airline-sample   # Create airline sample (100K rows)
+make create-recent-sample    # Create recent data sample (75K rows)
+
+# Development operations
+make test                    # Run all tests
+make lint                    # Run code quality checks
+make format                  # Format code with Black
+make clean                   # Clean generated files
+make help                    # Show all available commands
 ```
 
 ## Configuration
@@ -340,12 +519,53 @@ The project uses configuration files in the `configs/` directory:
 
 ## Contributing
 
+We welcome contributions! Please follow these guidelines:
+
+### Development Setup
+
 1. Fork the repository
-2. Create a feature branch
-3. Make your changes
-4. Add tests for new functionality
-5. Ensure all tests pass
-6. Submit a pull request
+2. Clone your fork locally
+3. Create a feature branch: `git checkout -b feature/your-feature-name`
+4. Set up the development environment:
+   ```bash
+   python -m venv venv
+   source venv/bin/activate  # On Windows: venv\Scripts\activate
+   pip install -r requirements.txt
+   make filter-dataset  # Generate sample data
+   ```
+
+### Development Guidelines
+
+1. **Code Quality**: Ensure all code passes linting and type checking
+   ```bash
+   make lint
+   make format
+   ```
+
+2. **Testing**: Add tests for new functionality and ensure all tests pass
+   ```bash
+   pytest tests/ -v
+   ```
+
+3. **Documentation**: Update documentation for any new features
+
+4. **Commit Messages**: Use clear, descriptive commit messages
+
+5. **Pull Request**: Submit a pull request with a clear description of changes
+
+### Code Standards
+
+- Follow PEP 8 style guidelines
+- Use type hints for all functions
+- Write docstrings for all public functions
+- Ensure test coverage for new code
+- Use British spelling throughout the project
+
+### Getting Help
+
+- Check existing issues and discussions
+- Open a new issue for bugs or feature requests
+- Join our development discussions
 
 ## Licence
 
