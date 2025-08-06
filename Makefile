@@ -143,7 +143,16 @@ info:
 	@echo "Flight Operations Optimiser"
 	@echo "Version: $(shell python -c 'import src; print(src.__version__)')"
 	@echo "Python: $(shell python --version)"
-	@echo "Location: $(shell pwd)" 
+	@echo "Location: $(shell pwd)"
+
+# Dashboard
+dashboard-install:
+	pip install -r requirements_dashboard.txt
+
+dashboard-run:
+	streamlit run dashboard.py --server.port 8501 --server.address 0.0.0.0
+
+dashboard: dashboard-install dashboard-run 
 
 # Dataset preprocessing
 filter-dataset: ## Filter and sample the flights dataset for development
