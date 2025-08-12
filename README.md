@@ -63,7 +63,7 @@ This section provides detailed explanations and interpretations of the key exper
 
 ### **Screenshot 1: Dashboard Overview & Key Metrics**
 
-**[Screenshot 1.PNG]**
+**[Screenshot 1: Dashboard Overview](screenshot-01-dashboard-overview.png)**
 
 **Description**: This screenshot shows the main Flight Operations Optimiser Dashboard with a dark theme, featuring comprehensive filtering capabilities and real-time key performance indicators.
 
@@ -98,7 +98,7 @@ This section provides detailed explanations and interpretations of the key exper
 
 ### **Screenshot 2: Delay Distribution Analysis**
 
-**[Screenshot 2.PNG]**
+**[Screenshot 2: Delay Distribution Analysis](screenshot-02-delay-distribution-analysis.png)**
 
 **Description**: This screenshot displays the "Detailed Performance Metrics" section with a delay distribution bar chart and comprehensive statistics table on a dark-themed dashboard.
 
@@ -139,7 +139,7 @@ This section provides detailed explanations and interpretations of the key exper
 
 ### **Screenshot 3: Time-Based Analysis - Day of Week & Hour of Day Patterns**
 
-**[Screenshot 3.PNG]**
+**[Screenshot 3: Time-Based Analysis](screenshot-03-time-based-analysis.png)**
 
 **Description**: This screenshot displays the "Time-Based Analysis" section with two charts: a bar chart showing delays by day of week and a line chart showing delays by hour of day, both on a dark-themed dashboard.
 
@@ -189,7 +189,7 @@ This section provides detailed explanations and interpretations of the key exper
 
 ### **Screenshot 4: Airline Performance Comparison**
 
-**[Screenshot 4.PNG]**
+**[Screenshot 4: Airline Performance Comparison](screenshot-04-airline-performance-comparison.png)**
 
 **Description**: This screenshot displays the "Airline Performance" section with a bar chart showing top airlines by on-time performance and a detailed performance table, both on a dark-themed dashboard.
 
@@ -235,7 +235,7 @@ This section provides detailed explanations and interpretations of the key exper
 
 ### **Screenshot 5: Route Analysis & Busiest Routes**
 
-**[Screenshot 5.PNG]**
+**[Screenshot 5: Route Analysis & Busiest Routes](screenshot-05-route-analysis-busiest-routes.png)**
 
 **Description**: This screenshot displays the "Route Analysis" section with a bar chart showing the busiest routes and a detailed route performance table, both on a dark-themed dashboard.
 
@@ -295,7 +295,7 @@ This section provides detailed explanations and interpretations of the key exper
 
 ### **Screenshot 6: Machine Learning Model Performance & Optimisation Results**
 
-**[Screenshot 6.PNG]**
+**[Screenshot 6: Machine Learning Model Performance](screenshot-06-machine-learning-model-performance.png)**
 
 **Description**: This screenshot displays the "Machine Learning Model Performance" section with three panels showing model accuracy, feature importance, and optimisation results on a dark-themed dashboard.
 
@@ -352,7 +352,7 @@ This section provides detailed explanations and interpretations of the key exper
 
 ### **Screenshot 7: Development Environment & Project Structure**
 
-**[Screenshot 7.PNG]**
+**[Screenshot 7: Development Environment & Project Structure](screenshot-07-development-environment-project-structure.png)**
 
 **Description**: This screenshot displays the Visual Studio Code integrated development environment showing the complete project structure and development workspace for the Flight Operations Optimiser project.
 
