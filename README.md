@@ -248,10 +248,6 @@ _Analysis of the busiest flight routes and their performance characteristics_
 ![Machine Learning Model Performance](screenshot-06-machine-learning-model-performance.png)
 _Performance metrics and evaluation of the delay prediction machine learning models_
 
-### **Development Environment & Project Structure**
-
-![Development Environment & Project Structure](screenshot-07-development-environment-project-structure.png)
-_Overview of the project structure and development environment setup_
 
 ## 🔄 CI/CD Pipeline
 
@@ -328,3 +324,4 @@ For support and questions, please open an issue on GitHub or contact the develop
 ---
 
 **Flight Operations Optimiser (iFOP)** - Transforming airline operations through intelligent data analytics and predictive optimisation.
+
