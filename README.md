@@ -216,6 +216,43 @@ make dashboard
 
 The dashboard will be available at: **http://localhost:8501**
 
+## 📸 Screenshots
+
+### **Dashboard Overview**
+
+![Dashboard Overview](screenshot-01-dashboard-overview.png)
+_Main dashboard interface showing key performance metrics and navigation options_
+
+### **Delay Distribution Analysis**
+
+![Delay Distribution Analysis](screenshot-02-delay-distribution-analysis.png)
+_Comprehensive analysis of flight delays showing distribution patterns and statistics_
+
+### **Time-based Analysis**
+
+![Time-based Analysis](screenshot-03-time-based-analysis.png)
+_Temporal patterns analysis including day of week and hour of day performance_
+
+### **Airline Performance Comparison**
+
+![Airline Performance Comparison](screenshot-04-airline-performance-comparison.png)
+_Comparative analysis of airline performance metrics and rankings_
+
+### **Route Analysis - Busiest Routes**
+
+![Route Analysis - Busiest Routes](screenshot-05-route-analysis-busiest-routes.png)
+_Analysis of the busiest flight routes and their performance characteristics_
+
+### **Machine Learning Model Performance**
+
+![Machine Learning Model Performance](screenshot-06-machine-learning-model-performance.png)
+_Performance metrics and evaluation of the delay prediction machine learning models_
+
+### **Development Environment & Project Structure**
+
+![Development Environment & Project Structure](screenshot-07-development-environment-project-structure.png)
+_Overview of the project structure and development environment setup_
+
 ## 🔄 CI/CD Pipeline
 
 The project includes a comprehensive CI/CD pipeline that automatically runs on every push and pull request:
